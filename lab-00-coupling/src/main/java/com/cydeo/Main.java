@@ -1,5 +1,6 @@
 package com.cydeo;
 
+import com.cydeo.loosely.Balance;
 import com.cydeo.loosely.BalanceManager;
 import com.cydeo.tightly.BalanceService;
 
@@ -10,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         UUID user = UUID.randomUUID();
 
-        CustomerBalance customerBalance = new CustomerBalance(user, BigDecimal.ZERO);
-        GiftCardBalance giftCardBalance = new GiftCardBalance(user, BigDecimal.ZERO);
+        Balance customerBalance = new CustomerBalance(user, BigDecimal.ZERO);
+        Balance giftCardBalance = new GiftCardBalance(user, BigDecimal.ZERO);
 
         customerBalance.addBalance(new BigDecimal(150));
         giftCardBalance.addBalance(new BigDecimal(120));
