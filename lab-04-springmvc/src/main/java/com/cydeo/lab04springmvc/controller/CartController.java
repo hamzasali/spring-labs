@@ -1,6 +1,7 @@
 package com.cydeo.lab04springmvc.controller;
 
 import com.cydeo.lab04springmvc.model.Cart;
+import com.cydeo.lab04springmvc.service.CartService;
 import com.cydeo.lab04springmvc.service.impl.CartServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,18 +13,23 @@ import java.util.UUID;
 @Controller
 public class CartController {
 
+    private final CartService cartService;
+
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+    }
+
     @RequestMapping("/cart-list")
     public String cartList(Model model) {
 
-        model.addAttribute("cartList", CartServiceImpl.CART_LIST);
-        model.addAttribute("cart", new Cart());
+        model.addAttribute("cartList", cartService.retrieveCartList());
         return "cart/cart-list";
     }
 
     @RequestMapping("/cart-list/{cartId}")
     public String cartDet(@PathVariable UUID cartId, Model model) {
 
-        model.addAttribute("cartItem", CartServiceImpl.CART_LIST);
+        model.addAttribute("cartItemList", cartService.retrieveCartDetail(cartId));
 
         return "cart/cart-detail";
     }
