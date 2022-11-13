@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 @Setter
 @NoArgsConstructor
 public class CartItem extends BaseEntity{
+
     private Integer quantity;
     @ManyToOne
     private Cart cart;
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
-    //12:05
 }

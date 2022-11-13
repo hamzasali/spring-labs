@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Cart extends BaseEntity {
+public class Cart extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private CartState cartState;
     @ManyToOne

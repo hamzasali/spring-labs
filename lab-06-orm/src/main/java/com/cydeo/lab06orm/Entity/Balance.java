@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Balance extends BaseEntity {
+public class Balance extends BaseEntity{
     private BigDecimal amount;
 
     @OneToOne

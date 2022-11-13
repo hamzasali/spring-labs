@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @NoArgsConstructor
 @Table(name = "orders")
-public class Order extends BaseEntity {
+public class Order extends BaseEntity{
     private BigDecimal paidPrice;
     private BigDecimal totalPrice;
     @ManyToOne
