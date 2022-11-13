@@ -19,7 +19,7 @@ public interface CartRepository extends JpaRepository<Cart,Long> {
     List<Cart> retrieveCartListByCustomer(Long id);
 
     //Write a derived query to get all cart by customer and cart state
-    List<Cart> findAllByCustomerIdAndCartState(Long id, CartState cartState);
+     List<Cart> findAllByCustomerIdAndCartState(Long id, CartState cartState);
 
     //Write a derived query to get all cart by customer and cart state and discount is null condition
     List<Cart> findAllByCustomerIdAndCartStateAndDiscountIsNull(Long id,CartState cartState);

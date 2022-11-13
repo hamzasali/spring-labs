@@ -23,5 +23,6 @@ public interface DiscountRepository extends JpaRepository<Discount, Long> {
     //Write a JPQL query to get all discounts amount between range of discount amount
     @Query("SELECT d FROM Discount d WHERE d.discount BETWEEN ?1 AND ?2")
     List<Discount> findAllByRangeBetweenAmount(BigDecimal startAmount, BigDecimal endAmount);
-    //03:10 :)
+
+
 }

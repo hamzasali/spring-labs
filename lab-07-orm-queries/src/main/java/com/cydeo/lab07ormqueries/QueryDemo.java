@@ -25,9 +25,8 @@ public class QueryDemo implements CommandLineRunner {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
     }
-
-
     @Override
     public void run(String... args) throws Exception {
+        System.out.println(orderRepository.findAllByCustomer_Email("lorwell7d@ebay.com").get(0).toString());
     }
 }
