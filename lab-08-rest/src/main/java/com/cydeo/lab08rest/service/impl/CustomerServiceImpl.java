@@ -2,6 +2,7 @@ package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.AddressDTO;
 import com.cydeo.lab08rest.dto.CustomerDTO;
+import com.cydeo.lab08rest.entity.Address;
 import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.CustomerRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,11 +47,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO create(CustomerDTO customer) {
-        return null;
+        Customer save = mapperUtil.convert(customer, new Customer());
+        return mapperUtil.convert(save, new CustomerDTO());
     }
 
     @Override
     public CustomerDTO update(CustomerDTO customer) {
-        return null;
+        Customer byId = customerRepository.findById(customer.getId()).get();
+        Customer convertedCustomer = mapperUtil.convert(customer, new Customer());
+        convertedCustomer.setId(byId.getId());
+        customerRepository.save(convertedCustomer);
+        return customer;
     }
 }

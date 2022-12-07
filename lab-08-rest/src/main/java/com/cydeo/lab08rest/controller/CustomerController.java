@@ -31,12 +31,17 @@ public class CustomerController {
                         customerService.findByEmail(email), HttpStatus.OK));
     }
 
+    @PostMapping
     public ResponseEntity<ResponseWrapper> createCustomer(@RequestBody CustomerDTO customer) {
 
         return ResponseEntity.ok(new ResponseWrapper("Customer Created",
                 customerService.create(customer), HttpStatus.OK));
     }
 
-//    public ResponseEntity<ResponseWrapper> updateCustomer(@RequestBody CustomerDTO customer) {
-//    }
+    @PutMapping
+    public ResponseEntity<ResponseWrapper> updateCustomer(@RequestBody CustomerDTO customer) {
+        customerService.update(customer);
+        return ResponseEntity.ok(new ResponseWrapper("Customer Successfully updated",
+                HttpStatus.OK));
+    }
 }
