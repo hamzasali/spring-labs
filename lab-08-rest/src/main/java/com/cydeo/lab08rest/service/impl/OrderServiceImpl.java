@@ -4,6 +4,7 @@ import com.cydeo.lab08rest.dto.OrderDTO;
 import com.cydeo.lab08rest.entity.Order;
 import com.cydeo.lab08rest.enums.PaymentMethod;
 import com.cydeo.lab08rest.mapper.MapperUtil;
+import com.cydeo.lab08rest.repository.CartRepository;
 import com.cydeo.lab08rest.repository.OrderRepository;
 import com.cydeo.lab08rest.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final MapperUtil mapperUtil;
+    private final CartRepository cartRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, MapperUtil mapperUtil) {
+    public OrderServiceImpl(OrderRepository orderRepository, MapperUtil mapperUtil, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.mapperUtil = mapperUtil;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -53,6 +56,11 @@ public class OrderServiceImpl implements OrderService {
         Order orderFromDB = orderRepository.findById(order.getId()).get();
         Order converted = mapperUtil.convert(order, new Order());
         converted.setId(orderFromDB.getId());
+        converted.setCart(orderFromDB.getCart());
+        converted.setCustomer(orderFromDB.getCustomer());
+        converted.setPayment(orderFromDB.getPayment());
+        converted.setPaidPrice(orderFromDB.getPaidPrice());
+        converted.setTotalPrice(orderFromDB.getTotalPrice());
         orderRepository.save(converted);
         return order;
     }
