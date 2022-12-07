@@ -39,12 +39,18 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO updateAddress(AddressDTO address) {
-        Address address1 = addressRepository.findByStreet(address.getStreet());
+        Address address1 = addressRepository.findByStreet(address.getStreet().toLowerCase());
         Address convertedAddress = mapperUtil.convert(address, new Address());
         convertedAddress.setId(address1.getId());
         addressRepository.save(convertedAddress);
         return address;
     }
+
+//    public AddressDTO updateAddress(AddressDTO addressDTO) {
+//        Address address = mapperUtil.convert(addressDTO, new Address());
+//        addressRepository.save(address);
+//        return addressDTO;
+//    }
 
     @Override
     public List<AddressDTO> getAddressesById(Long id) {
