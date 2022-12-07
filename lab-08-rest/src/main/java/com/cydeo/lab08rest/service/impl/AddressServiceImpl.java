@@ -31,4 +31,21 @@ public class AddressServiceImpl implements AddressService {
         addressRepository.save(mapperUtil.convert(address, new Address()));
         return address;
     }
+
+    @Override
+    public AddressDTO updateAddress(AddressDTO address) {
+        Address address1 = addressRepository.findByStreet(address.getStreet());
+        Address convertedAddress = mapperUtil.convert(address, new Address());
+        convertedAddress.setId(address1.getId());
+        addressRepository.save(convertedAddress);
+        return address;
+    }
+
+    @Override
+    public List<AddressDTO> getAddressesById(Long id) {
+        List<Address> addresses = addressRepository.retrieveByCustomerId(id);
+        return addresses.stream()
+                .map(address -> mapperUtil.convert(address, new AddressDTO()))
+                .collect(Collectors.toList());
+    }
 }
