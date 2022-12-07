@@ -38,14 +38,20 @@ public class AddressController {
         return ResponseEntity
                 .ok(new ResponseWrapper("Address updated successfully", HttpStatus.OK));
     }
+
     @GetMapping("/customer/{id}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("id") Long id) {
         return ResponseEntity
-                .ok(new ResponseWrapper("Addresses by Id", addressService.getAddressesById(id),HttpStatus.OK));
+                .ok(new ResponseWrapper("Addresses by Id", addressService.getAddressesById(id), HttpStatus.OK));
     }
-//
-//    public ResponseEntity<ResponseWrapper> getAddressListByStartsWithAddress(@RequestBody AddressDTO address) {
-//    }
+
+    @GetMapping("/startsWith/{address}")
+    public ResponseEntity<ResponseWrapper> getAddressListByStartsWithAddress(@PathVariable("address") String address) {
+
+        return ResponseEntity
+                .ok(new ResponseWrapper("Addresses starts with",
+                addressService.getAddressByStartsWith(address), HttpStatus.OK));
+    }
 //
 //    public ResponseEntity<ResponseWrapper> getAddressListByCustomerAndName(@RequestBody AddressDTO address) {
 //    }

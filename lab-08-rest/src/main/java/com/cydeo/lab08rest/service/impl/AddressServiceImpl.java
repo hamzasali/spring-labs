@@ -48,4 +48,12 @@ public class AddressServiceImpl implements AddressService {
                 .map(address -> mapperUtil.convert(address, new AddressDTO()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<AddressDTO> getAddressByStartsWith(String street) {
+        List<Address> addressList = addressRepository.findAllByStreetStartingWith(street);
+        return addressList.stream()
+                .map(address -> mapperUtil.convert(address, new AddressDTO()))
+                .collect(Collectors.toList());
+    }
 }
