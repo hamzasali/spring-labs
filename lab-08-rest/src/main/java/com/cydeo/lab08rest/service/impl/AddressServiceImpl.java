@@ -22,7 +22,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDTO> getAddresses() {
-       List<Address> addresses= addressRepository.findAll();
-       return addresses.stream().map(address -> mapperUtil.convert(address, new AddressDTO())).collect(Collectors.toList());
+        List<Address> addresses = addressRepository.findAll();
+        return addresses.stream().map(address -> mapperUtil.convert(address, new AddressDTO())).collect(Collectors.toList());
+    }
+
+    @Override
+    public AddressDTO createAddress(AddressDTO address) {
+        addressRepository.save(mapperUtil.convert(address, new Address()));
+        return address;
     }
 }
