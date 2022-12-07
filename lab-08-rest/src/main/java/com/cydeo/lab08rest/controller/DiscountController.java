@@ -39,6 +39,7 @@ public class DiscountController {
                         discountService.create(discount), HttpStatus.OK));
     }
 
+    @PutMapping
     public ResponseEntity<ResponseWrapper> updateDiscount(@RequestBody DiscountDTO discount) {
         discountService.update(discount);
         return ResponseEntity

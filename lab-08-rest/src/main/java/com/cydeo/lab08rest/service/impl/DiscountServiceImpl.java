@@ -2,6 +2,7 @@ package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.CustomerDTO;
 import com.cydeo.lab08rest.dto.DiscountDTO;
+import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.entity.Discount;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.DiscountRepository;
@@ -49,7 +50,7 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public DiscountDTO update(DiscountDTO discount) {
         Discount discountFromDB = discountRepository.findById(discount.getId()).get();
-        Discount converted = mapperUtil.convert(discountFromDB, new Discount());
+        Discount converted = mapperUtil.convert(discount, new Discount());
         converted.setId(discountFromDB.getId());
         discountRepository.save(converted);
         return discount;
