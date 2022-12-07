@@ -3,20 +3,21 @@ package com.cydeo.lab08rest.controller;
 import com.cydeo.lab08rest.dto.AddressDTO;
 import com.cydeo.lab08rest.model.ResponseWrapper;
 import com.cydeo.lab08rest.service.AddressService;
+import com.cydeo.lab08rest.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/address")
 public class AddressController {
 
     private final AddressService addressService;
+    private final CustomerService customerService;
 
-    public AddressController(AddressService addressService) {
+    public AddressController(AddressService addressService, CustomerService customerService) {
         this.addressService = addressService;
+        this.customerService = customerService;
     }
 
     @GetMapping
@@ -50,11 +51,18 @@ public class AddressController {
 
         return ResponseEntity
                 .ok(new ResponseWrapper("Addresses starts with",
-                addressService.getAddressByStartsWith(address), HttpStatus.OK));
+                        addressService.getAddressByStartsWith(address), HttpStatus.OK));
     }
-//
-//    public ResponseEntity<ResponseWrapper> getAddressListByCustomerAndName(@RequestBody AddressDTO address) {
-//    }
+
+    @GetMapping("/customer/{customerId}/name/{name}")
+    public ResponseEntity<ResponseWrapper> getAddressListByCustomerAndName(@PathVariable("customerId") Long customerId, @PathVariable String name) {
+
+        return ResponseEntity
+                .ok(new ResponseWrapper("Address List by Customer and Name",
+                        addressService.getAddressesByCustomerAndName(customerService.findById(customerId).getId(), name)
+                        , HttpStatus.OK));
+
+    }
 
 
 }
