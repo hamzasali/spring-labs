@@ -28,11 +28,12 @@ public class OrderController {
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateOrder(@RequestBody OrderDTO order) {
-        orderService.update(order);
+
         return ResponseEntity
                 .ok(new ResponseWrapper(
-                        "Order Updated successfully"
-                        , HttpStatus.OK));
+                        "Order Updated successfully",
+                        orderService.update(order),
+                        HttpStatus.OK));
     }
 
     @GetMapping

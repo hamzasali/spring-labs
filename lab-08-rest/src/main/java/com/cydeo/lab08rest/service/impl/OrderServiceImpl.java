@@ -53,14 +53,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO update(OrderDTO order) {
-        Order orderFromDB = orderRepository.findById(order.getId()).get();
         Order converted = mapperUtil.convert(order, new Order());
-        converted.setId(orderFromDB.getId());
-        converted.setCart(orderFromDB.getCart());
-        converted.setCustomer(orderFromDB.getCustomer());
-        converted.setPayment(orderFromDB.getPayment());
-        converted.setPaidPrice(orderFromDB.getPaidPrice());
-        converted.setTotalPrice(orderFromDB.getTotalPrice());
         orderRepository.save(converted);
         return order;
     }
