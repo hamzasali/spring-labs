@@ -25,4 +25,5 @@ public interface ProductService {
     List<ProductDTO> getAllByPriceAndQuantity(BigDecimal price, Integer quantity);
 
 
+    List<ProductDTO> retrieveProductByCategoryAndPrice(List<Long> categoryList, BigDecimal price);
 }

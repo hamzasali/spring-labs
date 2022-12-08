@@ -1,6 +1,7 @@
 package com.cydeo.lab08rest.controller;
 
 import com.cydeo.lab08rest.dto.ProductDTO;
+import com.cydeo.lab08rest.dto.ProductRequest;
 import com.cydeo.lab08rest.model.ResponseWrapper;
 import com.cydeo.lab08rest.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -82,6 +83,14 @@ public class ProductController {
         return ResponseEntity.ok(new ResponseWrapper(
                 "Product List by Price and Quantity",
                 productService.getAllByPriceAndQuantity(price, quantity),
+                HttpStatus.OK));
+    }
+
+    @PostMapping("/categoryandprice")
+    public ResponseEntity<ResponseWrapper> retrieveProductByCategoryAndPrice(@RequestBody ProductRequest productRequest) {
+        return ResponseEntity.ok(new ResponseWrapper(
+                "Products are successfully retrieved",
+                productService.retrieveProductByCategoryAndPrice(productRequest.getCategoryList(),productRequest.getPrice()),
                 HttpStatus.OK));
     }
 }

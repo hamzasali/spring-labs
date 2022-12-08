@@ -27,16 +27,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO create(ProductDTO product) {
-        return mapperUtil.convert(productRepository.save(mapperUtil.convert(product, new Product())), new ProductDTO());
+        return mapperUtil.convert(
+                productRepository.save(
+                        mapperUtil.convert(
+                                product, new Product())), new ProductDTO());
     }
 
     @Override
     public ProductDTO update(ProductDTO product) {
-        Product productFromDB = productRepository.findById(product.getId()).get();
         Product converted = mapperUtil.convert(product, new Product());
-        converted.setId(productFromDB.getId());
-//        converted.setCategoryList(productFromDB.getCategoryList());
-//        converted.setName(productFromDB.getName());
         productRepository.save(converted);
         return product;
     }
@@ -89,5 +88,11 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-
+    @Override
+    public List<ProductDTO> retrieveProductByCategoryAndPrice(List<Long> categoryList, BigDecimal price) {
+        return productRepository.retrieveProductListByCategory(categoryList, price)
+                .stream()
+                .map(product -> mapperUtil.convert(product, new ProductDTO()))
+                .collect(Collectors.toList());
+    }
 }
