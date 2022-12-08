@@ -46,10 +46,13 @@ public class ProductController {
 
     @GetMapping("/top3")
     public ResponseEntity<ResponseWrapper> getTop3ProductList() {
-        return null;
+        return ResponseEntity.ok(new ResponseWrapper(
+                "Top 3 Products",
+                productService.getTop3All(),
+                HttpStatus.OK));
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<ResponseWrapper> getProductListByName(@PathVariable String name) {
         return ResponseEntity.ok(new ResponseWrapper(
                 "Product List by name",

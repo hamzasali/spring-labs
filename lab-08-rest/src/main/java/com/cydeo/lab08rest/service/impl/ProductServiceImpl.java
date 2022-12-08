@@ -48,6 +48,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDTO> getTop3All() {
+        List<Product> top3ByOrderByPriceDesc = productRepository.findTop3ByOrderByPriceDesc();
+        return top3ByOrderByPriceDesc.stream()
+                .map(product -> mapperUtil.convert(product, new ProductDTO()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ProductDTO getByName(String name) {
         Product byName = productRepository.findFirstByName(name);
         return mapperUtil.convert(byName, new ProductDTO());

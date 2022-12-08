@@ -12,6 +12,7 @@ public interface ProductService {
     ProductDTO update(ProductDTO product);
 
     List<ProductDTO> getAll();
+    List<ProductDTO> getTop3All();
 
     ProductDTO getByName(String name);
 
