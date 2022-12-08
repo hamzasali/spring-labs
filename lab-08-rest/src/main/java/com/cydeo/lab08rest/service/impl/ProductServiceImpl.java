@@ -64,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getAllByCategory(Long id) {
-        List<Product> productList = productRepository.findAllByCategoryListContaining(categoryRepository.findById(id).get());
+        List<Product> productList = productRepository.retrieveProductListByCategory(id);
         return productList.stream()
                 .map(product -> mapperUtil.convert(product, new ProductDTO()))
                 .collect(Collectors.toList());
