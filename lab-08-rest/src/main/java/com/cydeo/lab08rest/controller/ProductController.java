@@ -30,9 +30,10 @@ public class ProductController {
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateProduct(@RequestBody ProductDTO product) {
-        productService.update(product);
+
         return ResponseEntity.ok(new ResponseWrapper(
                 "Product updated",
+                productService.update(product),
                 HttpStatus.OK));
     }
 

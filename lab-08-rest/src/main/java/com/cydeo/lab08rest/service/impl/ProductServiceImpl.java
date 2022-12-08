@@ -35,8 +35,8 @@ public class ProductServiceImpl implements ProductService {
         Product productFromDB = productRepository.findById(product.getId()).get();
         Product converted = mapperUtil.convert(product, new Product());
         converted.setId(productFromDB.getId());
-        converted.setCategoryList(productFromDB.getCategoryList());
-        converted.setName(productFromDB.getName());
+//        converted.setCategoryList(productFromDB.getCategoryList());
+//        converted.setName(productFromDB.getName());
         productRepository.save(converted);
         return product;
     }
