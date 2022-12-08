@@ -1,6 +1,7 @@
 package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.ProductDTO;
+import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.entity.Product;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.CategoryRepository;
@@ -34,6 +35,8 @@ public class ProductServiceImpl implements ProductService {
         Product productFromDB = productRepository.findById(product.getId()).get();
         Product converted = mapperUtil.convert(product, new Product());
         converted.setId(productFromDB.getId());
+        converted.setCategoryList(productFromDB.getCategoryList());
+        converted.setName(productFromDB.getName());
         productRepository.save(converted);
         return product;
     }
