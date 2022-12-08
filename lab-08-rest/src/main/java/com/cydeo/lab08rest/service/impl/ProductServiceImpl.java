@@ -1,7 +1,6 @@
 package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.ProductDTO;
-import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.entity.Product;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.CategoryRepository;
@@ -64,11 +63,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> getAllByName(String name) {
-        return null;
-    }
-
-    @Override
     public List<ProductDTO> getAllByCategory(Long id) {
         List<Product> productList = productRepository.findAllByCategoryListContaining(categoryRepository.findById(id).get());
         return productList.stream()
@@ -77,15 +71,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> getAllByPrice(BigDecimal price) {
-        return null;
+    public Integer countByPrice(BigDecimal price) {
+        return productRepository.countProductByPriceGreaterThan(price);
     }
 
     @Override
     public List<ProductDTO> getAllByPriceAndQuantity(BigDecimal price, Integer quantity) {
-        List<Product> equal = productRepository.findAllByQuantityIsGreaterThanEqual(quantity);
+        List<Product> products = productRepository.retrieveProductListGreaterThanPriceAndLowerThanRemainingQuantity(price, quantity);
 
-        return null;
+        return products.stream()
+                .map(product -> mapperUtil.convert(product, new ProductDTO()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -95,4 +91,5 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> mapperUtil.convert(product, new ProductDTO()))
                 .collect(Collectors.toList());
     }
+
 }

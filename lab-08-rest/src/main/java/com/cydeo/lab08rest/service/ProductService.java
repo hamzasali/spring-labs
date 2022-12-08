@@ -12,18 +12,16 @@ public interface ProductService {
     ProductDTO update(ProductDTO product);
 
     List<ProductDTO> getAll();
+
     List<ProductDTO> getTop3All();
 
     ProductDTO getByName(String name);
 
-    List<ProductDTO> getAllByName(String name);
-
     List<ProductDTO> getAllByCategory(Long id);
 
-    List<ProductDTO> getAllByPrice(BigDecimal price);
+    Integer countByPrice(BigDecimal price);
 
     List<ProductDTO> getAllByPriceAndQuantity(BigDecimal price, Integer quantity);
-
 
     List<ProductDTO> retrieveProductByCategoryAndPrice(List<Long> categoryList, BigDecimal price);
 }

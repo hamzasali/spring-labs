@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -55,9 +54,9 @@ public class ProductController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<ResponseWrapper> getProductListByName(@PathVariable String name) {
+    public ResponseEntity<ResponseWrapper> getProductByName(@PathVariable String name) {
         return ResponseEntity.ok(new ResponseWrapper(
-                "Product List by name",
+                "Product by name",
                 productService.getByName(name),
                 HttpStatus.OK));
     }
@@ -74,7 +73,7 @@ public class ProductController {
     public ResponseEntity<ResponseWrapper> getProductListByPrice(@PathVariable BigDecimal price) {
         return ResponseEntity.ok(new ResponseWrapper(
                 "Product List by Price",
-                productService.getAllByPrice(price),
+                productService.countByPrice(price),
                 HttpStatus.OK));
     }
 
@@ -90,7 +89,7 @@ public class ProductController {
     public ResponseEntity<ResponseWrapper> retrieveProductByCategoryAndPrice(@RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok(new ResponseWrapper(
                 "Products are successfully retrieved",
-                productService.retrieveProductByCategoryAndPrice(productRequest.getCategoryList(),productRequest.getPrice()),
+                productService.retrieveProductByCategoryAndPrice(productRequest.getCategoryList(), productRequest.getPrice()),
                 HttpStatus.OK));
     }
 }
