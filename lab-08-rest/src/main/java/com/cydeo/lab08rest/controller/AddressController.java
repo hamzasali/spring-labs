@@ -35,9 +35,12 @@ public class AddressController {
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateAddress(@RequestBody AddressDTO address) {
-        addressService.updateAddress(address);
+
         return ResponseEntity
-                .ok(new ResponseWrapper("Address updated successfully", HttpStatus.OK));
+                .ok(new ResponseWrapper(
+                        "Address updated successfully",
+                        addressService.updateAddress(address)
+                        , HttpStatus.OK));
     }
 
     @GetMapping("/customer/{id}")
