@@ -58,10 +58,10 @@ public class ProductController {
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<ResponseWrapper> getProductListByCategory(@PathVariable("id") String name) {
+    public ResponseEntity<ResponseWrapper> getProductListByCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(new ResponseWrapper(
-                "Product List by name",
-                productService.getAllByCategory(name),
+                "Product List by Category",
+                productService.getAllByCategory(id),
                 HttpStatus.OK));
     }
 
@@ -76,7 +76,7 @@ public class ProductController {
     @GetMapping("/price/{price}/quantity/{quantity}")
     public ResponseEntity<ResponseWrapper> getProductListByPriceAndQuantity(@PathVariable BigDecimal price, @PathVariable Integer quantity) {
         return ResponseEntity.ok(new ResponseWrapper(
-                "Product List by name",
+                "Product List by Price and Quantity",
                 productService.getAllByPriceAndQuantity(price, quantity),
                 HttpStatus.OK));
     }

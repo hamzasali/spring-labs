@@ -17,7 +17,7 @@ public interface ProductService {
 
     List<ProductDTO> getAllByName(String name);
 
-    List<ProductDTO> getAllByCategory(String name);
+    List<ProductDTO> getAllByCategory(Long id);
 
     List<ProductDTO> getAllByPrice(BigDecimal price);
 
